@@ -47,6 +47,7 @@
     "react-dev-utils": "^6.1.1",
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
+    "react-sticky": "^6.0.3",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.0",
@@ -121,12 +122,17 @@
         "import",
         {
           "libraryName": "antd-mobile",
-          "style": "css"
+          "libraryDirectory": "es",
+          "style": true
         }
       ]
     ]
   },
   "devDependencies": {
     "babel-plugin-import": "^1.11.0"
+  },
+  "theme": {
+    "brand-primary": "#FF5001",
+    "color-text-base":  "#333"
   }
 }

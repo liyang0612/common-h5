@@ -17,6 +17,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const theme = require('../package.json').theme;
 
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -314,11 +315,17 @@ module.exports = {
             ),
           },
           {
-            test: /\.(css|less)$/,
-            use: getStyleLoaders({ importLoaders: 2 }, 'less-loader'),
+            test: /\.less$/,
+            use: [
+              'style-loader',
+              'css-loader',
+              {loader: 'less-loader', options: {modifyVars: theme}},
+            ],
+            include: /node_modules/,
           },
           {
             test: /\.(css|less)$/,
+            exclude: /node_module/,
             // loaders: ['style-loader', 'css-loader?modules','less-loader'],
             use: getStyleLoaders(
                 {
@@ -326,7 +333,7 @@ module.exports = {
                   modules: true,
                   localIdentName: '[hash:base64:5]__[local]-[hash:base64:5]',
                 },
-                'less-loader'
+                "less-loader"
             ),
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
