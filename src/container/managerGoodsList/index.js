@@ -1,9 +1,8 @@
 import React from 'react'
 import { Tabs, WhiteSpace } from 'antd-mobile'
 import { StickyContainer, Sticky } from 'react-sticky'
-import ListPage from './ListPage'
+import ListPage from '../../component/ListPage'
 import Row from './Row'
-import styles from '../style.less'
 
 function renderTabBar(props) {
   return (<Sticky>
@@ -34,16 +33,10 @@ function Index() {
               initalPage={'t2'}
               renderTabBar={renderTabBar}
         >
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-            <ListPage row={Row} separator={separator}/>
-          </div>
-          {/*<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '800px', backgroundColor: '#fff' }}>*/}
-            {/*Content of second tab*/}
-          {/*</div>*/}
-          {/*<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '800px', backgroundColor: '#fff' }}>*/}
-            {/*Content of third tab*/}
-          {/*</div>*/}
         </Tabs>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
+          <ListPage row={Row} separator={separator}/>
+        </div>
       </StickyContainer>
       <WhiteSpace />
     </div>

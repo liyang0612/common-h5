@@ -35,8 +35,8 @@ html,body {
       display: flex;
       margin-bottom: 20px;
       .infoLeft {
-        width: 7rem;
-        height: 7rem;
+        width: 6.855rem;
+        height: 6.855rem;
         margin-right: 15px;
       }
       .infoRight {
@@ -51,14 +51,12 @@ html,body {
           word-break: break-all;
           display: -webkit-box;
           -webkit-line-clamp: 2;
-          /* autoprefixer: off */
+          /* autoprefixer: ignore next */
           -webkit-box-orient: vertical;
-          /* autoprefixer: on */
           overflow: hidden;
         }
         .goodsPriceCount {
           font-size:12px;
-          font-family:PingFangSC-Medium;
           font-weight:500;
           color:rgba(153,153,153,1);
           line-height:12px;
@@ -73,14 +71,12 @@ html,body {
         }
         .goodsPrice {
           font-size:18px;
-          font-family:PingFangSC-Semibold;
           font-weight:600;
           color:rgba(34,34,34,1);
           line-height:18px;
         }
         .goodsProfits {
           font-size:12px;
-          font-family:PingFangSC-Semibold;
           color: @theme-color;
           line-height:12px;
         }
@@ -100,7 +96,6 @@ html,body {
         .num {
           color: #222;
           font-size: 15px;
-          font-family:PingFangSC-Semibold;
           font-weight:600;
         }
         .text {
@@ -164,14 +159,40 @@ html,body {
           line-height: 20px;
           height: 36px;
         }
+        .goodsPriceCount {
+          font-weight: 400;
+          padding-top: 4px;
+        }
       }
     }
     .activeTime {
       display: flex;
       margin: 10px 0;
       .time {
-        width: 124px;
+        width: 125px;
         font-size:11px;
+        .timeTxt {
+          background: @theme-color;
+          color: #fff;
+          border-radius: 2px 0 0 2px;
+          padding: 0px 5px;
+        }
+        .timeNum {
+          color: @theme-color;
+          position: relative;
+          padding: 0 5px;
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: solid 1px @theme-color;
+            box-sizing: border-box;
+            border-radius: 0 2px 2px 0;
+          }
+        }
       }
       .inventory {
         text-align: right;
@@ -188,7 +209,7 @@ html,body {
       display: flex;
       position: absolute;
       left: 0;
-      bottom: -15px;
+      bottom: -1.5555rem;
       width: 100%;
       .priceStore {
         flex: 1;
@@ -208,6 +229,10 @@ html,body {
           font-weight:600;
           color: @theme-color;
           line-height:18px;
+        }
+        .oldPrice {
+          margin-left: 5px;
+          text-decoration: line-through;
         }
       }
       .btnWrap {

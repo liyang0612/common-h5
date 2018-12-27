@@ -1,7 +1,6 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { ListView } from 'antd-mobile'
-import styles from '../style.less'
+import styles from '../container/style.less'
 
 
 const data = [
@@ -61,7 +60,6 @@ class Demo extends React.Component {
   }
 
   componentDidMount() {
-    const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this.lv).parentNode.offsetTop
     // simulate initial Ajax
     setTimeout(() => {
       genData()

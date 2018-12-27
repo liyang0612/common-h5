@@ -1,7 +1,6 @@
 import React from 'react'
-import ListPage from '../managerGoodsList/ListPage'
+import ListPage from '../../component/ListPage'
 import Row from './Row'
-import styles from '../style.less'
 
 const GoodsList = () => (
     <div>

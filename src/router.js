@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import React from 'react'
+import {Router, Route, Switch} from 'dva/router'
 import App from './App'
-import ManagerGoodsList  from './container/managerGoodsList'
+import ManagerGoodsList from './container/managerGoodsList'
 import StoreGoodsList from './container/storeGoodsList'
 
-
-export default class RouteConfig extends Component{
-  render(){
-    return(
-        <HashRouter>
-          <Switch>
-            <Route path="/" exact component={App} />
-            <Route path="/managerGoodsList" exact component={ManagerGoodsList} />
-            <Route path="/storeGoodsList" exact component={StoreGoodsList} />
-          </Switch>
-        </HashRouter>
-    )
-  }
+function RouterConfig({history}) {
+  return (
+    <Router history={history}>
+      <Switch>
+        <Route path="/" exact component={App}/>
+        <Route path="/managerGoodsList" exact component={ManagerGoodsList}/>
+        <Route path="/storeGoodsList" exact component={StoreGoodsList}/>
+      </Switch>
+    </Router>
+  )
 }
+
+export default RouterConfig

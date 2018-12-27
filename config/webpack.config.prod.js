@@ -21,7 +21,7 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
-
+const theme = require('../package.json').theme;
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -401,6 +401,28 @@ module.exports = {
                 getLocalIdent: getCSSModuleLocalIdent,
               },
               'sass-loader'
+            ),
+          },
+          {
+            test: /\.less$/,
+            use: [
+              'style-loader',
+              'css-loader',
+              {loader: 'less-loader', options: {modifyVars: theme, javascriptEnabled: true}},
+            ],
+            include: /node_modules/,
+          },
+          {
+            test: /\.(css|less)$/,
+            exclude: /node_module/,
+            // loaders: ['style-loader', 'css-loader?modules','less-loader'],
+            use: getStyleLoaders(
+              {
+                importLoaders: 2,
+                modules: true,
+                localIdentName: '[hash:base64:5]__[local]-[hash:base64:5]',
+              },
+              "less-loader"
             ),
           },
           // "file" loader makes sure assets end up in the `build` folder.
