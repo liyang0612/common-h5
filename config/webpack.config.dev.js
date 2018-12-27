@@ -319,7 +319,7 @@ module.exports = {
             use: [
               'style-loader',
               'css-loader',
-              {loader: 'less-loader', options: {modifyVars: theme}},
+              {loader: 'less-loader', options: {modifyVars: theme, javascriptEnabled: true}},
             ],
             include: /node_modules/,
           },

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import App from './App'
-import GoodsListStore from './container/GoodsListStore'
+import ManagerGoodsList  from './container/managerGoodsList'
+import StoreGoodsList from './container/storeGoodsList'
 
 
 export default class RouteConfig extends Component{
@@ -10,7 +11,8 @@ export default class RouteConfig extends Component{
         <HashRouter>
           <Switch>
             <Route path="/" exact component={App} />
-            <Route path="/goodsListStore" exact component={GoodsListStore} />
+            <Route path="/managerGoodsList" exact component={ManagerGoodsList} />
+            <Route path="/storeGoodsList" exact component={StoreGoodsList} />
           </Switch>
         </HashRouter>
     )

@@ -18,6 +18,7 @@
     "css-loader": "1.0.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
+    "dva": "^2.4.1",
     "eslint": "5.6.0",
     "eslint-config-react-app": "^3.0.5",
     "eslint-loader": "2.1.1",
@@ -36,6 +37,8 @@
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "0.4.3",
+    "mobx": "^5.8.0",
+    "mobx-react": "^5.4.3",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.1.0",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -58,6 +61,10 @@
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.3"
   },
+  "devDependencies": {
+    "babel-plugin-import": "^1.11.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5"
+  },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
@@ -72,6 +79,33 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "babel": {
+    "plugins": [
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ],
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ],
+      [
+        "import",
+        {
+          "libraryName": "antd-mobile",
+          "libraryDirectory": "es",
+          "style": true
+        }
+      ]
+    ],
+    "presets": [
+      "react-app"
+    ]
+  },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
@@ -113,26 +147,8 @@
       "node"
     ]
   },
-  "babel": {
-    "presets": [
-      "react-app"
-    ],
-    "plugins": [
-      [
-        "import",
-        {
-          "libraryName": "antd-mobile",
-          "libraryDirectory": "es",
-          "style": true
-        }
-      ]
-    ]
-  },
-  "devDependencies": {
-    "babel-plugin-import": "^1.11.0"
-  },
   "theme": {
     "brand-primary": "#FF5001",
-    "color-text-base":  "#333"
+    "color-text-base": "#333"
   }
 }
