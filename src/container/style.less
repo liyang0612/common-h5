@@ -1,7 +1,8 @@
-html,body {
+html, body {
   font-size: 14px;
 }
-@theme-color: rgba(255,80,1,1);
+
+@theme-color: rgba(255, 80, 1, 1);
 .listPage {
   .h5Btn {
     width: 75px;
@@ -10,19 +11,24 @@ html,body {
     text-align: center;
     line-height: 28px;
     display: inline-block;
-    border:1px solid rgba(216,216,216,1);
+    border: 1px solid rgba(216, 216, 216, 1);
     box-sizing: border-box;
     border: none;
     border-radius: 1px;
     &::before {
-    border-radius: 2px !important
+      border-radius: 2px !important
+    }
   }
+  :global(.am-list-body) {
+    &::before {
+      height: 0!important;
+    }
   }
   .h5BtnGradient {
-    background:linear-gradient(270deg,rgba(255,152,42,1) 0%,rgba(255,67,1,1) 100%);
+    background: linear-gradient(270deg, rgba(255, 152, 42, 1) 0%, rgba(255, 67, 1, 1) 100%);
     color: #fff;
     &::before {
-      border: none!important
+      border: none !important
     }
   }
   .listRow {
@@ -43,11 +49,11 @@ html,body {
         position: relative;
         flex: 1;
         .goodsName {
-          font-size:15px;
-          font-family:PingFangSC-Regular;
-          font-weight:400;
-          color:rgba(51,51,51,1);
-          line-height:21px;
+          font-size: 15px;
+          font-family: PingFangSC-Regular;
+          font-weight: 400;
+          color: rgba(51, 51, 51, 1);
+          line-height: 21px;
           word-break: break-all;
           display: -webkit-box;
           -webkit-line-clamp: 2;
@@ -56,10 +62,10 @@ html,body {
           overflow: hidden;
         }
         .goodsPriceCount {
-          font-size:12px;
-          font-weight:500;
-          color:rgba(153,153,153,1);
-          line-height:12px;
+          font-size: 12px;
+          font-weight: 500;
+          color: rgba(153, 153, 153, 1);
+          line-height: 12px;
         }
         .goodsName, .goodsPriceCount {
           margin-bottom: 5px;
@@ -70,23 +76,23 @@ html,body {
           left: 0;
         }
         .goodsPrice {
-          font-size:18px;
-          font-weight:600;
-          color:rgba(34,34,34,1);
-          line-height:18px;
+          font-size: 18px;
+          font-weight: 600;
+          color: rgba(34, 34, 34, 1);
+          line-height: 18px;
         }
         .goodsProfits {
-          font-size:12px;
+          font-size: 12px;
           color: @theme-color;
-          line-height:12px;
+          line-height: 12px;
         }
       }
     }
     .amountInfo {
       margin-bottom: 20px;
-      height:50px;
-      background:rgba(245,245,245,1);
-      border-radius:2px;
+      height: 50px;
+      background: rgba(245, 245, 245, 1);
+      border-radius: 2px;
       display: flex;
       padding: 10px;
       .amountBlock {
@@ -96,10 +102,10 @@ html,body {
         .num {
           color: #222;
           font-size: 15px;
-          font-weight:600;
+          font-weight: 600;
         }
         .text {
-          color:rgba(34,34,34,1);
+          color: rgba(34, 34, 34, 1);
           font-size: 12px;
         }
       }
@@ -112,9 +118,9 @@ html,body {
           right: -1px;
           width: 1px;
           display: block;
-          height:30px;
-          background:rgba(217,217,217,1);
-          border-radius:2px;
+          height: 30px;
+          background: rgba(217, 217, 217, 1);
+          border-radius: 2px;
         }
       }
     }
@@ -138,7 +144,7 @@ html,body {
       }
     }
   }
-  .storeList{
+  .storeList {
     position: relative;
     height: 10.2rem;
     box-sizing: border-box;
@@ -147,9 +153,10 @@ html,body {
       position: absolute;
       left: 0;
       bottom: -1px;
-      width: 100%;
+      width: 200%;
       height: 1px;
-      background: rgba(245,245,245,1);
+      background: rgba(245, 245, 245, 1);
+      transform: scaleY(.5);
     }
     .goodsInfo {
       margin-bottom: 0;
@@ -170,7 +177,7 @@ html,body {
       margin: 10px 0;
       .time {
         width: 125px;
-        font-size:11px;
+        font-size: 11px;
         .timeTxt {
           background: @theme-color;
           color: #fff;
@@ -197,12 +204,12 @@ html,body {
       .inventory {
         text-align: right;
         flex: 1;
-        height:11px;
-        font-size:11px;
-        font-family:PingFangSC-Regular;
-        font-weight:400;
-        color:rgba(153,153,153,1);
-        line-height:11px;
+        height: 11px;
+        font-size: 11px;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(153, 153, 153, 1);
+        line-height: 11px;
       }
     }
     .activeOpr {
@@ -213,22 +220,22 @@ html,body {
       width: 100%;
       .priceStore {
         flex: 1;
-        font-size:11px;
-        font-family:PingFangSC-Regular;
-        font-weight:400;
-        color:rgba(136,136,136,1);
-        line-height:11px;
+        font-size: 11px;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(136, 136, 136, 1);
+        line-height: 11px;
         padding-top: 8px;
         .priceSymbol {
           font-size: 12px;
           color: @theme-color;
         }
         .price {
-          font-size:18px;
-          font-family:PingFangSC-Semibold;
-          font-weight:600;
+          font-size: 18px;
+          font-family: PingFangSC-Semibold;
+          font-weight: 600;
           color: @theme-color;
-          line-height:18px;
+          line-height: 18px;
         }
         .oldPrice {
           margin-left: 5px;
@@ -248,12 +255,68 @@ html,body {
 }
 
 .countDwonBlock {
-  width:18px;
-  height:18px;
-  background:rgba(34,34,34,1);
-  border-radius:2px;
+  width: 18px;
+  height: 18px;
+  background: rgba(34, 34, 34, 1);
+  border-radius: 2px;
   display: inline-block;
   color: #fff;
   line-height: 17px;
   text-align: center;
+}
+
+.footerMenu {
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  z-index: 999;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  height: 50px;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width:100%;
+    height: 1px;
+    background: #f5f5f9;
+    top: 0;
+    transform: scaleY(.5);
+  }
+  .footerMenuItem {
+    flex: 1;
+    text-align: center;
+    .itemIcon {
+      margin-top: 6px;
+      .iconTxt {
+        position: relative;
+        &::after {
+          content: '%';
+          position: absolute;
+          top: 0;
+          left: 7px;
+          font-size: 10px;
+          color: #fff;
+        }
+      }
+      .activeMenu {
+        background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(255, 94, 38, 1)), to(rgba(255, 130, 86, 1)));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      i {
+        color: #222222;
+        font-size: 22px;
+      }
+    }
+    .itemTxt {
+      height: 14px;
+      font-size: 10px;
+      font-family: PingFangSC-Regular;
+      font-weight: 400;
+      color: rgba(34, 34, 34, 1);
+      line-height: 14px;
+    }
+  }
 }

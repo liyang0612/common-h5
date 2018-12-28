@@ -2,6 +2,7 @@ import React from 'react'
 import { Tabs, WhiteSpace } from 'antd-mobile'
 import { StickyContainer, Sticky } from 'react-sticky'
 import ListPage from '../../component/ListPage'
+import {connect} from "dva";
 import Row from './Row'
 
 function renderTabBar(props) {
@@ -25,7 +26,11 @@ const separator = (sectionID, rowID) => (
     />
 )
 
-function Index() {
+function ManagerGoodsList({ manageGoodsList, dispatch }) {
+  const load = () => {
+    dispatch({ type: 'storeGoodsList/fetchGoodsList'})
+  }
+  const { dataSource } = manageGoodsList
   return (
     <div>
       <StickyContainer>
@@ -35,7 +40,7 @@ function Index() {
         >
         </Tabs>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-          <ListPage row={Row} separator={separator}/>
+          <ListPage row={Row} separator={separator} dataSource={dataSource} load={load}/>
         </div>
       </StickyContainer>
       <WhiteSpace />
@@ -43,4 +48,6 @@ function Index() {
   )
 }
 
-export default Index
+const mapStateToProps = ({ manageGoodsList }) => ({ manageGoodsList })
+
+export default connect(mapStateToProps)(ManagerGoodsList)
