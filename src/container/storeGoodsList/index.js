@@ -1,8 +1,9 @@
 import React from 'react'
-import ListPage from '../../component/ListPage'
-import Row from './Row'
-import Footer from './Footer'
 import {connect} from "dva";
+import ListPage from '../../component/ListPage'
+import StoreCarousel from './storeCarousel'
+import Row from './Row'
+// import Footer from './Footer'
 
 const GoodsList = ({ storeGoodsList, dispatch }) => {
   const load = () => {
@@ -11,10 +12,9 @@ const GoodsList = ({ storeGoodsList, dispatch }) => {
   const { dataSource } = storeGoodsList
   return (
     <div>
-      {/*<i className="iconfont icon-cart"></i>*/}
-      <Footer/>
+      <StoreCarousel/>
+      {/*<Footer/>*/}
       <ListPage row={Row} dataSource={dataSource} load={load}/>
-
     </div>
   )
 }

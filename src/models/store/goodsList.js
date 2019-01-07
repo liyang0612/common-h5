@@ -1,4 +1,4 @@
-// import { getTest } from '../services/'
+import { getList, getCustomerGallery } from '../../services/'
 import {ListView} from "antd-mobile"
 
 export default {
@@ -6,46 +6,19 @@ export default {
   namespace: 'storeGoodsList',
 
   state: {
-    sectionIDs: [],
-    rowIDs: [],
-    dataBlobs: {},
-    pageIndex: 0,
+    sectionIDs: [],   //listView需要的sectionIDs
+    rowIDs: [],       //listView需要的每行的rowIDS
+    dataBlobs: {},    //listView的数据
+    pageIndex: 0,     //当前页面的index
     loading: true,
-    goodsData: [
-      {
-        img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-        des: '【游戏手机】幻影黑移动联通电信双卡双待全面屏 4G',
-      },
-      {
-        img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
-        des: '【畅享7S】华为全面屏双摄 4黑色 移动联通电信4G手机',
-      },
-      {
-        img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-        des: '【游戏手机】幻影黑移动联通电信双卡双待全面屏 4G',
-      },
-      {
-        img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
-        des: '【畅享7S】华为全面屏双摄 4黑色 移动联通电信4G手机',
-      },
-      {
-        img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-        des: '【游戏手机】幻影黑移动联通电信双卡双待全面屏 4G',
-      },
-      {
-        img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
-        des: '【畅享7S】华为全面屏双摄 4黑色 移动联通电信4G手机',
-      },
-      {
-        img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-        des: '【游戏手机】幻影黑移动联通电信双卡双待全面屏 4G',
-      }
-    ],
-    dataSource: new ListView.DataSource({
+    goodsData: [],    //列表数据
+    dataSource: new ListView.DataSource({ //listView的数据源
       getRowData: (dataBlob, sectionID, rowID) => dataBlob[rowID],
       rowHasChanged: (row1, row2) => row1 !== row2,
       sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
-    })
+    }),
+    isShowCarousel: true,
+    carouselList: [1, 2], //走马灯的数据
   },
 
   subscriptions: {
@@ -53,15 +26,25 @@ export default {
       history.listen(({ pathname, search }) => {
         if(pathname === '/storeGoodsList') {
           dispatch({ type: 'save', payload: { pageIndex: 0, sectionIDs: [], rowIDs: [], dataBlobs: {}, }})
-          dispatch({ type: 'fetchGoodsList'})
+          dispatch({ type: 'fetch' })
         }
       });
     },
   },
 
   effects: {
-    *fetchGoodsList({ payload }, { call, put, select }) {  // eslint-disable-line
-      // const { data } = yield call(getTest, payload)
+    *fetch({ payload }, { call, put }) {
+      yield put({ type: 'customerGallery' })
+      yield put({ type: 'goodsList', payload: { page: 1, pageSize: 10 }})
+    },
+    *customerGallery({ payload }, { call, put }) {
+      const { data } = yield call(getCustomerGallery, payload)
+      yield put({ type: 'save', payload: { carouselList: data, isShowCarousel: true }})
+    },
+    *goodsList({ payload }, { call, put, select }) {  // eslint-disable-line
+      const { data } = yield call(getList, payload)
+      yield put({type: 'save', payload: { goodsData: data.list }})
+
       const stateSelect = yield select( ({ storeGoodsList: { goodsData, sectionIDs, rowIDs, dataBlobs, dataSource, pageIndex } }) => ({ goodsData, sectionIDs, rowIDs, dataBlobs, dataSource, pageIndex  }) );
       const { sectionIDs, rowIDs } = yield call(genData, stateSelect);
       yield put({type: 'save',
