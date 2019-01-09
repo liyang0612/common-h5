@@ -1,4 +1,4 @@
-// import { getTest } from '../services/'
+import { getManagerGoodsList, managerGoodsOpr } from '../../services/'
 import {ListView} from "antd-mobile"
 
 export default {
@@ -6,17 +6,13 @@ export default {
   namespace: 'manageGoodsList',
 
   state: {
-    sectionIDs: [],
-    rowIDs: [],
-    dataBlobs: {},
-    pageIndex: 0,
+    sectionIDs: [],     //listView需要的sectionIDs
+    rowIDs: [],         //listView需要的rowIDs
+    dataBlobs: {},      //listView的Row的数据
+    pageIndex: 0,       //当前页
+    activeStatus: 2,
     loading: true,
-    goodsData: [
-      {
-        img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
-        des: '【游戏手机】幻影黑移动联通电信双卡双待全面屏 4G',
-      },
-    ],
+    goodsData: [],
     dataSource: new ListView.DataSource({
       getRowData: (dataBlob, sectionID, rowID) => dataBlob[rowID],
       rowHasChanged: (row1, row2) => row1 !== row2,
@@ -29,15 +25,19 @@ export default {
       history.listen(({ pathname, search }) => {
         if(pathname === '/managerGoodsList') {
           dispatch({ type: 'save', payload: { pageIndex: 0, sectionIDs: [], rowIDs: [], dataBlobs: {}, }})
-          dispatch({ type: 'fetchGoodsList'})
+          dispatch({ type: 'goodsList', payload: { page: 1, pageSize: 10, status: 2}})
         }
       });
     },
   },
 
   effects: {
-    *fetchGoodsList({ payload }, { call, put, select }) {  // eslint-disable-line
-      // const { data } = yield call(getTest, payload)
+    //获取商品列表
+    *goodsList({ payload, callback }, { call, put, select }) {  // eslint-disable-line
+      const data = yield call(getManagerGoodsList, payload)
+      yield put({type: 'save', payload: { goodsData: data.data.list } })
+      callback && callback(data)
+
       const stateSelect = yield select( ({ manageGoodsList: { goodsData, sectionIDs, rowIDs, dataBlobs, dataSource, pageIndex } }) => ({ goodsData, sectionIDs, rowIDs, dataBlobs, dataSource, pageIndex  }) );
       const { sectionIDs, rowIDs } = yield call(genData, stateSelect);
       yield put({type: 'save',
@@ -45,6 +45,11 @@ export default {
           sectionIDs, rowIDs, pageIndex: stateSelect.pageIndex + 1, dataSource: stateSelect.dataSource.cloneWithRowsAndSections(stateSelect.dataBlobs, sectionIDs, rowIDs) }
       })
     },
+    //上下架商品
+    *goodsOpr({ payload, callback }, { call, put }) {
+      const data = yield call(managerGoodsOpr, payload)
+      callback(data)
+    }
   },
 
   reducers: {

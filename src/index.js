@@ -3,7 +3,11 @@ import './font/iconfont.css'
 import * as serviceWorker from './serviceWorker';
 
 // 1. Initialize
-const app = dva();
+const app = dva({
+  onError(e, dispatch) {
+    console.log(e, e.message)
+  }
+});
 
 // 2. Plugins
 // app.use({});

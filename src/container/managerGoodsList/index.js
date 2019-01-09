@@ -11,9 +11,9 @@ function renderTabBar(props) {
   </Sticky>);
 }
 const tabs = [
-  { title: '进行中' },
-  { title: '未开始' },
-  { title: '已结束' },
+  { title: '进行中', status: 2 },
+  { title: '未开始', status: 3 },
+  { title: '已结束', status: 4 },
 ];
 
 const separator = (sectionID, rowID) => (
@@ -26,21 +26,44 @@ const separator = (sectionID, rowID) => (
     />
 )
 
+const load = (dispatch, manageGoodsList) => {
+  const { pageIndex, activeStatus } = manageGoodsList
+  dispatch({ type: 'manageGoodsList', payload: { loading: true } })
+  dispatch({ 
+    type: 'manageGoodsList/goodsList',
+    payload: { page: pageIndex + 1, pageSize: 10, status: activeStatus },
+    callback(res) {
+      if(res.status === 'T') {
+        dispatch({ type: 'manageGoodsList', payload: { loading: false } })
+      }
+    }
+  })
+}
+
 function ManagerGoodsList({ manageGoodsList, dispatch }) {
-  const load = () => {
-    dispatch({ type: 'storeGoodsList/fetchGoodsList'})
+  const { dataSource, activeStatus, loading } = manageGoodsList
+  //tabs切换事件
+  const handleTabsChange = (tab, index) => {
+    dispatch({ type: 'manageGoodsList/save', payload: { activeStatus: tab.status, pageIndex: 0, sectionIDs: [], rowIDs: [], dataBlobs: {} }})
+    dispatch({ type: 'manageGoodsList/goodsList', payload: { page: 1, pageSize: 10, status: tab.status }})
   }
-  const { dataSource } = manageGoodsList
   return (
     <div>
       <StickyContainer>
-        <Tabs tabs={tabs}
-              initalPage={'t2'}
-              renderTabBar={renderTabBar}
+        <Tabs 
+          tabs={tabs}
+          onChange={handleTabsChange}
+          renderTabBar={renderTabBar}
         >
         </Tabs>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-          <ListPage row={Row} separator={separator} dataSource={dataSource} load={load}/>
+          <ListPage 
+            row={Row(activeStatus, dispatch)} 
+            separator={separator} 
+            dataSource={dataSource}
+            load={() => load(dispatch, manageGoodsList)}
+            loading={loading}
+            />
         </div>
       </StickyContainer>
       <WhiteSpace />

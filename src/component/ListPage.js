@@ -5,9 +5,6 @@ import styles from '../container/style.less'
 class ListPage extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      loading: false
-    }
   }
 
   componentDidMount() {
@@ -17,7 +14,7 @@ class ListPage extends React.Component {
   onEndReached = (event) => {
     console.log('reach end', event)
     // this.setState({ isLoading: true })
-    this.props.load();
+    this.props.load && this.props.load()
   }
 
   render() {
@@ -28,7 +25,7 @@ class ListPage extends React.Component {
             ref={el => this.lv = el}
             dataSource={dataSource}
             renderFooter={() => (<div style={{ padding: 30, textAlign: 'center' }}>
-              {this.state.isLoading ? 'Loading...' : '没有更多了'}
+              {this.props.loading ? 'Loading...' : '没有更多了'}
             </div>)}
             renderRow={row}
             renderSeparator={separator}

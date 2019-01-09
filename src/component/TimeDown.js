@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import styles from "../style.less";
 
 export default class TimeDown extends Component {
   constructor(props) {
@@ -47,8 +48,11 @@ export default class TimeDown extends Component {
   }
   render() {
     let {day, hour, minute, second} = this.state
-    return (
+    return this.props.type === 'store' ? (
         <span>{day}天 {hour}: {minute}: {second}</span>
-    )
+    ) : (<span> {day}天
+            <span className={styles.countDwonBlock}>{hour}</span>:
+            <span className={styles.countDwonBlock}>{minute}</span>:
+            <span className={styles.countDwonBlock}>{second}</span></span>)
   }
 }
